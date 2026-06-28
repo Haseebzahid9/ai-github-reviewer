@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg:        #0f1117;
+    --surface:   #181c27;
+    --card:      #1e2333;
+    --border:    #2a3047;
+    --muted:     #8892a4;
+    --text:      #e8ecf4;
+    --accent:    #7c5cfc;
+    --accent-lt: #a78bfa;
+    --success:   #22d3a5;
+    --warning:   #f59e0b;
+    --danger:    #f4606c;
+  }
+
+  html { background-color: var(--bg); }
+
+  body {
+    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  * { box-sizing: border-box; }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar          { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track    { background: transparent; }
+  ::-webkit-scrollbar-thumb    { background: var(--border); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+}
+
+@layer components {
+  /* Card */
+  .card {
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+
+  /* Section heading */
+  .section-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+}
+
+@layer utilities {
+  /* Animated score bar — set --bar-width before use */
+  .animate-bar {
+    animation: barFill 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+
+  @keyframes barFill {
+    from { width: 0%; }
+    to   { width: var(--bar-width); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-fade-in  { animation: fadeIn  0.35s ease-out; }
+  .animate-slide-up { animation: slideUp 0.35s ease-out; }
+
+  /* Glow on accent buttons */
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: opacity 0.15s, box-shadow 0.15s;
+  }
+  .btn-primary:hover:not(:disabled) {
+    opacity: 0.9;
+    box-shadow: 0 0 0 3px rgba(124, 92, 252, 0.3);
+  }
+  .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; }
+
+  .btn-ghost {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-weight: 500;
+    border-radius: 8px;
+    transition: background 0.15s;
+  }
+  .btn-ghost:hover { background: var(--surface); }
+}
